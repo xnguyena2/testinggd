@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/new_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Entity/Cricket/Cricket.tscn" type="PackedScene" id=2]
+
+[node name="Scene" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 393225, 0, 0, 393226, 0, 2, 393227, 0, 2, 393228, 0, 3, 524290, 0, 0, 524291, 0, 2, 524292, 0, 2, 524293, 0, 1, 524294, 0, 2, 524295, 0, 2, 524296, 0, 2, 524297, 0, 1, 524298, 0, 2, 524299, 0, 2, 524300, 0, 1, 524301, 0, 2, 524302, 0, 3 )
+
+[node name="Cricket" parent="." instance=ExtResource( 2 )]
+position = Vector2( 386, 410 )
+speed = Vector2( 400, 1000 )
