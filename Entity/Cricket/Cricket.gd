@@ -4,22 +4,38 @@ extends Actor
 # var a = 2
 # var b = "text"
 
+var is_flip = false
+
+onready var _critket = $Critket
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
+	var snap: Vector2 = transform.y * 10 if direction.y == 0.0 else Vector2.ZERO
+	if is_on_floor():
+		rotation = get_floor_normal().angle() + PI/2
 	_velocity = move_and_slide_with_snap(
-		_velocity, snap, FLOOR_NORMAL, true
+		_velocity.rotated(rotation), snap, -transform.y, true
 	)
+	_velocity = _velocity.rotated(-rotation)
 
+func _input(event):
+	var direction: = get_direction()
+	var current_flip = direction.x > 0
+	if current_flip != is_flip && direction.x != 0:
+		is_flip = current_flip
+	_critket.set_flip_h( is_flip )
+	if is_flip:
+		_critket.offset = Vector2(56,0)
+	else:
+		_critket.offset = Vector2(0,0)
+	
 
 func get_direction() -> Vector2:
 	return Vector2(
