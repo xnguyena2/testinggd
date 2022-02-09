@@ -1,10 +1,9 @@
 extends Actor
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-var is_flip = false
+var is_flip = true
+
+var is_attacking = false
 
 onready var _critket = $Critket
 
@@ -16,28 +15,24 @@ onready var _melee_blend_pos = $AnimationTree.get("parameters/Melee/blend_positi
 
 
 func _physics_process(delta):
-	var is_attacking = false
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
-	if Input.is_action_just_pressed("melee"):
-		direction = Vector2.ZERO
-		is_attacking = true
-	if direction == Vector2.ZERO:
-		if !is_attacking:
-			_ani_playback.travel("Idle")
-		else:
-			print("attack")
-			_ani_playback.travel("Melee")
+	
+	if is_attacking:
+		if is_on_floor():
+			direction = Vector2.ZERO
+		_ani_playback.travel("Melee")
+	elif direction == Vector2.ZERO:
+		_ani_playback.travel("Idle")
 	else:
-		_idle_blend_pos = direction
-		_run_blend_pos = direction
-		_melee_blend_pos = direction
 		_ani_playback.travel("Running")
+		
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	var snap: Vector2 = transform.y * 10 if direction.y == 0.0 else Vector2.ZERO
 	#if is_on_floor():
 	#	rotation = get_floor_normal().angle() + PI/2
 	#_velocity.x *= delta*80
+	#rotation+=delta
 	_velocity = move_and_slide_with_snap(
 		_velocity#.rotated(rotation)
 		, snap, -transform.y, true
@@ -45,6 +40,8 @@ func _physics_process(delta):
 	#_velocity = _velocity.rotated(-rotation)
 
 func _input(event):
+	if event.is_action_released("jump"):
+		print("jump release")
 	var direction: = get_direction()
 	var current_flip = direction.x > 0
 	if current_flip != is_flip && direction.x != 0:
@@ -54,7 +51,12 @@ func _input(event):
 		_critket.offset = Vector2(56,0)
 	else:
 		_critket.offset = Vector2(0,0)
-	
+
+	if Input.is_action_just_pressed("melee"):
+		is_attacking = true
+
+func _ani_melee_finished():
+	is_attacking = false
 
 func get_direction() -> Vector2:
 	return Vector2(
