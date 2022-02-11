@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://assets/critket.png" type="Texture" id=1]
 [ext_resource path="res://Entity/Cricket/Cricket.gd" type="Script" id=2]
@@ -23,6 +23,81 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 5, 4, 3, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "Inertial"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Critket:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 23, 22 ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "Jumping_Left"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Critket:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 21, 20, 19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Critket:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 16 ), Vector2( 0, 33 ), Vector2( 0, 54 ) ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "Jumping_Right"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Critket:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 21, 20, 19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Critket:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 56, 16 ), Vector2( 56, 33 ), Vector2( 56, 54 ) ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -56,6 +131,9 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=51]
+resource_name = "New Anim"
+
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
@@ -69,6 +147,46 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Critket:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 56, 0 ) ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "RESET_LEFT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Critket:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Critket:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -111,6 +229,52 @@ blend_point_3/node = SubResource( 10 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "Inertial"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "Inertial"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "Inertial"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "Inertial"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=36]
+blend_point_0/node = SubResource( 32 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 33 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 34 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 35 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=61]
+animation = "Jumping_Left"
+
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "Jumping_Right"
+
+[sub_resource type="AnimationNodeAnimation" id=67]
+animation = "Jumping_Left"
+
+[sub_resource type="AnimationNodeAnimation" id=68]
+animation = "Jumping_Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=63]
+blend_point_0/node = SubResource( 61 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 62 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 67 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 68 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=20]
 animation = "Melee"
 
@@ -131,6 +295,29 @@ blend_point_1/pos = Vector2( 0, -1 )
 blend_point_2/node = SubResource( 23 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 29 )
+blend_point_3/pos = Vector2( -1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "RESET"
+
+[sub_resource type="AnimationNodeAnimation" id=80]
+animation = "RESET"
+
+[sub_resource type="AnimationNodeAnimation" id=81]
+animation = "RESET"
+
+[sub_resource type="AnimationNodeAnimation" id=82]
+animation = "RESET_LEFT"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=74]
+blend_point_0/node = SubResource( 79 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 80 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 81 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 82 )
 blend_point_3/pos = Vector2( -1, 0 )
 blend_mode = 1
 
@@ -156,30 +343,54 @@ blend_point_2/pos = Vector2( 0, 1 )
 blend_point_3/node = SubResource( 18 )
 blend_point_3/pos = Vector2( 0, -1 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
 [sub_resource type="AnimationNodeStateMachine" id=5]
 states/Idle/node = SubResource( 11 )
-states/Idle/position = Vector2( -1206, -122 )
+states/Idle/position = Vector2( -1499, 15 )
+states/Inertial/node = SubResource( 36 )
+states/Inertial/position = Vector2( -1168.43, -137 )
+states/Jumping/node = SubResource( 63 )
+states/Jumping/position = Vector2( -1449.43, 238.4 )
 states/Melee/node = SubResource( 24 )
-states/Melee/position = Vector2( -1074.43, -13 )
+states/Melee/position = Vector2( -993.43, 247 )
+states/RESET/node = SubResource( 74 )
+states/RESET/position = Vector2( -1639.43, 141.4 )
 states/Running/node = SubResource( 14 )
-states/Running/position = Vector2( -916, -122 )
-transitions = [ "Idle", "Running", SubResource( 15 ), "Running", "Idle", SubResource( 16 ), "Idle", "Melee", SubResource( 25 ), "Melee", "Running", SubResource( 26 ), "Melee", "Idle", SubResource( 27 ), "Running", "Melee", SubResource( 28 ) ]
+states/Running/position = Vector2( -805, 15 )
+transitions = [ "Idle", "Melee", SubResource( 25 ), "Melee", "Running", SubResource( 26 ), "Melee", "Idle", SubResource( 27 ), "Running", "Melee", SubResource( 28 ), "Running", "Inertial", SubResource( 37 ), "Inertial", "Idle", SubResource( 38 ), "Idle", "Running", SubResource( 39 ), "Idle", "Jumping", SubResource( 64 ), "Running", "Jumping", SubResource( 65 ), "Jumping", "RESET", SubResource( 75 ), "RESET", "Running", SubResource( 76 ), "RESET", "Idle", SubResource( 77 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -1782.43, -187 )
+graph_offset = Vector2( -1991.43, -17.61 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 66.5, 9 )
 
 [node name="Cricket" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -195,13 +406,18 @@ texture = ExtResource( 1 )
 offset = Vector2( 56, 0 )
 flip_h = true
 hframes = 6
-vframes = 3
+vframes = 4
 frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
+anims/Inertial = SubResource( 31 )
+anims/Jumping_Left = SubResource( 60 )
+anims/Jumping_Right = SubResource( 40 )
 anims/Melee = SubResource( 19 )
+"anims/New Anim" = SubResource( 51 )
 anims/RESET = SubResource( 3 )
+anims/RESET_LEFT = SubResource( 78 )
 anims/Running = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -209,6 +425,18 @@ tree_root = SubResource( 5 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 6 )
-parameters/Idle/blend_position = Vector2( -0.395604, 0.189655 )
-parameters/Melee/blend_position = Vector2( -0.00313973, -0.0172414 )
+parameters/Idle/blend_position = Vector2( 0.733124, -0.24031 )
+parameters/Inertial/blend_position = Vector2( 0, 0 )
+parameters/Jumping/blend_position = Vector2( 1, -0.00775194 )
+parameters/Melee/blend_position = Vector2( 0, 0 )
+parameters/RESET/blend_position = Vector2( 0.326531, -0.387597 )
 parameters/Running/blend_position = Vector2( -0.0502355, 0.0412371 )
+
+[node name="GroundDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+position = Vector2( 0.5, 6 )
+shape = SubResource( 50 )
+
+[connection signal="body_entered" from="GroundDetector" to="." method="_on_GroundDetector_body_entered"]
+[connection signal="body_exited" from="GroundDetector" to="." method="_on_GroundDetector_body_exited"]
